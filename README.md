@@ -99,8 +99,8 @@ This is a work in progress. The following are not implemented.
 
 ## Credits
 
-The board colors come from [chess.com](https://chess.com)
+The board colors come from [chess.com](https://chess.com).
 
 The piece images are from [Wikimedia Commons](https://commons.wikimedia.org/) and are included in the ```/images``` folder. See Wikimedia Commons for each image's license and attribution requirements. 
 
-PyFish is named after [Stock Fish](https://stockfishchess.org/)
+PyFish is named after [Stock Fish](https://stockfishchess.org/).
