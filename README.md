@@ -35,6 +35,24 @@ git clone https://github.com/Atticus-Beard/PyFish.git
 python -m pip install -r requirements.txt
 ```
 
+## Running the Game
+
+From the project root (so the `images/` folder can be found):
+
+```bash
+python main.py
+```
+
+## How to play
+
+1. White plays first.
+2. Click one of your pieces to select it. The square is highlighted and valid moves appear as dots.
+3. Click a destination square to move the piece. If the move is invalid, the selection is cleared.
+4. Click on the same piece again to deselect it.
+5. Turns alternate automatically after every valid move.
+
+Close the window to quit the program.
+
 ## Project structure
 ```
 .
@@ -59,23 +77,6 @@ The `images/` folder must contain 12 PNG files, one per piece. Filenames are `<c
 
 Images are scaled automatically to fit each square (80x80 px)
 
-## Running the Game
-
-From the project root (so the `images/` folder can be found):
-
-```bash
-python main.py
-```
-
-## How to play
-
-1. White plays first.
-2. Click one of your pieces to select it. The square is highlighted and valid moves appear as dots.
-3. Click a destination square to move the piece. If the move is invalid, the selection is cleared.
-4. Click on the same piece again to deselect it.
-5. Turns alternate automatically after every valid move.
-
-Close the window to quit the program.
 
 ## How it works
 
