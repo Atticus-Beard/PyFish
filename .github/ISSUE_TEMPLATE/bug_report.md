@@ -4,6 +4,7 @@ about: Report a reproducible problem with PyFish
 title: "[Bug]: "
 labels: bug
 assignees: ''
+type: Bug
 
 ---
 
