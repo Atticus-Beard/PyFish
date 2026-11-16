@@ -3,7 +3,8 @@ name: Bug report
 about: Report a reproducible problem with PyFish
 title: "[Bug]: "
 labels: bug
-assignees: ""
+assignees: ''
+
 ---
 
 ## Describe the bug
