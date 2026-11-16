@@ -38,7 +38,7 @@ python -m pip install -r requirements.txt
 ## Project structure
 ```
 .
-├── main.py          # The game (rename to match your file)
+├── main.py          # The game
 ├── images/          # Piece textures
 │   ├── wR.png  wN.png  wB.png  wQ.png  wK.png  wP.png
 │   └── bR.png  bN.png  bB.png  bQ.png  bK.png  bP.png
