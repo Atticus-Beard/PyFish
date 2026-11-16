@@ -102,3 +102,4 @@ The board colors come from [chess.com](https://chess.com)
 
 The piece images are from [Wikimedia Commons](https://commons.wikimedia.org/) and are included in the ```/images``` folder. See Wikimedia Commons for each image's license and attribution requirements. 
 
+PyFish is named after [Stock Fish](https://stockfishchess.org/)
