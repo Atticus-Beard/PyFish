@@ -95,7 +95,7 @@ This is a work in progress. The following are not implemented.
 - [ ] **En passant**
 - [ ] **Pawn Promotion**
 - [ ] Game-over / win screen and reset
-- [ ] Bot player 2
+- [ ] Bot player
 
 ## Credits
 
