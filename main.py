@@ -144,7 +144,12 @@ def is_valid_move(board, start, end):
         if col_diff == 0 and row_diff == direction and target == "--":
             return True
 
-        if col_diff == 0 and row_diff == 2 * direction and start_row == start_row_base:
+        # Move forward two squares (initial move)
+        if col_diff == 0 and row_diff == 2 * direction and start_row == start_row_base and target == "--":
+            intermediate_row = start_row + direction
+            if board[intermediate_row][start_col] != "--":
+                return False
+                
             return True
 
         # Pawn captures diagonally
