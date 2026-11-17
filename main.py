@@ -180,12 +180,20 @@ def is_valid_move(board, start, end):
 
         return True
 
+    # --- KNIGHT RULES ---
     elif piece_type == "N":
         is_l_shape = (abs(row_diff) == 2 and abs(col_diff) == 1) or (abs(row_diff) == 1 and abs(col_diff) == 2)
 
         if not is_l_shape:
             return False
 
+        return True
+
+    # Added king rules.
+
+    elif piece_type == "K":
+        if max(abs(row_diff), abs(col_diff)) != 1:
+            return False
         return True
 
 
