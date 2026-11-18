@@ -88,7 +88,7 @@ Images are scaled automatically to fit each square (80x80 px)
 
 ## Roadmap / Known limitations
 
-This is a work in progress. The following are not implemented.
+This is a work in progress. The following are not implemented. To view complete roadmap view issue [#7](https://github.com/Atticus-Beard/PyFish/issues/7)
 
 - [ ] **Check, checkmate, and stalemate** detection
 - [ ] **Castling**
