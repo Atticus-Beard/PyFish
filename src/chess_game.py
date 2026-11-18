@@ -1,5 +1,5 @@
 import pygame
-from board import Board
+from src.board import Board
 from renderer import Renderer
 from config import WIDTH, HEIGHT, SQ_SIZE, FPS, DIMENSION
 
