@@ -46,4 +46,3 @@ class Renderer:
                         self.images[piece],
                         square,
                     )
-
