@@ -54,6 +54,31 @@ class Board:
         opponent = "b" if color == "w" else "w"
         return self.is_square_attacked(king_position, opponent)
 
+    def is_legal_move(self, start, end) -> bool:
+        start_row, start_col = start
+        end_row, end_col = end
+
+        piece = self.grid[start_row][start_col]
+        if piece == "--":
+            return False
+
+        # Piece-movement rules (no king-safety check here)
+        if not self.is_valid_move(start, end):
+            return False
+
+        color = piece[0]
+        captured = self.grid[end_row][end_col]
+
+        # Simulate the move
+        self.move(start, end)
+        leaves_king_in_check = self.is_in_check(color)
+
+        # Undo the move
+        self.grid[start_row][start_col] = piece
+        self.grid[end_row][end_col] = captured
+
+        return not leaves_king_in_check
+
     def is_valid_move(self, start, end) -> bool:
         start_row, start_col = start
         end_row, end_col = end
