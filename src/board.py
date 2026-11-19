@@ -1,3 +1,6 @@
+from config import DIMENSION
+
+
 class Board:
     def __init__(self):
         self.grid = [
@@ -25,6 +28,31 @@ class Board:
 
         self.grid[row][col] = piece
         self.grid[start_row][start_col] = "--"
+
+    def find_king(self, color):
+        '''Takes in parameter color and returns tuple of where that king is.'''
+        for row in range(DIMENSION):
+            for col in range(DIMENSION):
+                if self.grid[row][col] == f"{color}K":
+                    return(row,col)
+
+        return None
+
+    def is_square_attacked(self, square, by_color):
+        for row in range(DIMENSION):
+            for col in range(DIMENSION):
+                piece = self.grid[row][col]
+
+                if piece != "--" and piece[0] == by_color:
+                    if self.is_valid_move((row, col), square):
+                        return True
+
+        return False
+
+    def is_in_check(self, color):
+        king_position = self.find_king(color)
+        opponent = "b" if color == "w" else "w"
+        return self.is_square_attacked(king_position, opponent)
 
     def is_valid_move(self, start, end) -> bool:
         start_row, start_col = start
