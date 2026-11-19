@@ -43,12 +43,12 @@ class ChessGame:
 
             for r in range(DIMENSION):
                 for c in range(DIMENSION):
-                    if self.board.is_valid_move(position, (r, c)):
+                    if self.board.is_legal_move(position, (r, c)):
                         self.valid_moves.append((r, c))
             return
 
         # Second click: try to move the selected piece.
-        if self.board.is_valid_move(self.selected_piece, position):
+        if self.board.is_legal_move(self.selected_piece, position):
             self.board.move(self.selected_piece, position)
             self.turn = "b" if self.turn == "w" else "w"
 
