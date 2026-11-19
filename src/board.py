@@ -55,6 +55,29 @@ class Board:
         return self.is_square_attacked(king_position, opponent)
 
     def is_legal_move(self, start, end) -> bool:
+        """
+        Determine whether a move is fully legal, including king safety.
+
+        A move is legal if it follows the piece's movement rules (as checked by
+        is_valid_move) and does not leave the moving player's own king in check.
+        The move is simulated on the board, tested for check, and then undone, so
+        the board state is unchanged when this method returns.
+
+        Args:
+            start (tuple[int, int]): (row, col) of the piece to move.
+            end (tuple[int, int]): (row, col) of the destination square.
+
+        Returns:
+            bool: True if the move is legal, False if the start square is empty,
+            the piece cannot move that way, or the move would leave (or keep) the
+            mover's king in check.
+
+        Note:
+            Uses is_valid_move for movement rules only, and is_in_check for king
+            safety. Do not call this from is_square_attacked, as that would cause
+            infinite recursion.
+        """
+
         start_row, start_col = start
         end_row, end_col = end
 
@@ -80,6 +103,14 @@ class Board:
         return not leaves_king_in_check
 
     def is_valid_move(self, start, end) -> bool:
+        """
+        Check whether a move follows the movement rules of the piece being moved.
+
+        This validates piece geometry and path blocking only. It does NOT check
+        whether the move would leave the mover's own king in check; use
+        is_legal_move for that. This method is also used by is_square_attacked,
+        so it must not call is_in_check (that would cause infinite recursion).
+        """
         start_row, start_col = start
         end_row, end_col = end
 
