@@ -46,3 +46,9 @@ class Renderer:
                         self.images[piece],
                         square,
                     )
+
+                if (row, col) == selected_piece:
+                    highlight_surface = pygame.Surface((SQ_SIZE, SQ_SIZE), pygame.SRCALPHA)
+                    highlight_surface.fill((255, 255, 0, 120))  # Translucent yellow
+                    self.screen.blit(highlight_surface, square.topleft)
+                    pygame.draw.rect(self.screen, (255, 215, 0), square, 4)
