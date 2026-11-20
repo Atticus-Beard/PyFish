@@ -16,6 +16,21 @@ class Renderer:
             )
 
     def draw_board(self, board, selected_piece, valid_moves):
+        """
+        :param board:
+        board takes in type of Board().
+        :param selected_piece:
+         selected_piece is used to highlight the (row,col) of the selected_piece.
+
+        :param valid_moves:
+        valid_moves is used to highlight with dots the valid moves the selected_piece can do.
+        """
+        checked_kings = {
+            board.find_king(color)
+            for color in ("w", "b")
+            if board.is_in_check(color)
+        }
+
         for row in range(DIMENSION):
             for col in range(DIMENSION):
                 color = (
@@ -52,3 +67,6 @@ class Renderer:
                     highlight_surface.fill((255, 255, 0, 120))  # Translucent yellow
                     self.screen.blit(highlight_surface, square.topleft)
                     pygame.draw.rect(self.screen, (255, 215, 0), square, 4)
+
+                if (row, col) in checked_kings:
+                    pygame.draw.rect(self.screen, (180, 0, 0), square, 4)
