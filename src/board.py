@@ -102,6 +102,31 @@ class Board:
 
         return not leaves_king_in_check
 
+
+    def has_legal_move(self, color: str) -> bool:
+        for start_row in range(DIMENSION):
+            for start_col in range(DIMENSION):
+                start = (start_row, start_col)
+                piece = self.get_piece(start)
+
+                if piece == "--" or piece[0] != color:
+                    continue
+
+                for end_row in range(DIMENSION):
+                    for end_col in range(DIMENSION):
+                        if self.is_legal_move(start, (end_row, end_col)):
+                            return True
+
+        return False
+
+
+    def is_checkmate(self, color) -> bool:
+        return self.is_in_check(color) and not self.has_legal_move(color)
+
+    def is_stalemate(self, color) -> bool:
+        return not self.is_in_check(color) and not self.has_legal_move(color)
+
+
     def is_valid_move(self, start, end) -> bool:
         """
         Check whether a move follows the movement rules of the piece being moved.
