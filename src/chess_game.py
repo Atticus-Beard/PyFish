@@ -69,6 +69,37 @@ class ChessGame:
         self.selected_piece = ()
         self.valid_moves = []
 
+
+    def show_game_over(self):
+        # Create fonts for the result message and restart instructions.
+        font = pygame.font.SysFont("arial", 48)
+        small_font = pygame.font.SysFont("arial", 24)
+
+        # Add a semi-transparent dark overlay over the finished chessboard.
+        overlay = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+        overlay.fill((0, 0, 0, 180))
+        self.screen.blit(overlay, (0,0))
+
+        # Prepares the text to render.
+        title = font.render(self.result, True, (255, 255, 255))
+        instructions = small_font.render(
+            "Press R to restart or ESC to quit",
+            True,
+            (255, 255, 255)
+        )
+
+        # Position the text in the center of the screen
+        self.screen.blit(
+            title,
+            title.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 30))
+        )
+
+        self.screen.blit(
+            instructions,
+            instructions.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 30)),
+        )
+
+
     def run(self):
         while self.running:
             for event in pygame.event.get():
