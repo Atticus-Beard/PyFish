@@ -20,6 +20,9 @@ class ChessGame:
         self.turn = "w"
         self.running = True
 
+        self.game_over = False
+        self.result = ""
+
     def handle_click(self):
         col = pygame.mouse.get_pos()[0] // SQ_SIZE
         row = pygame.mouse.get_pos()[1] // SQ_SIZE
@@ -54,17 +57,14 @@ class ChessGame:
 
             if self.board.is_checkmate(self.turn):
                 winner = "b" if self.turn == "w" else "w"
-
-                # Handle win screen here.
-                print(
-                    f"Checkmate - {'White' if winner == 'w' else 'Black'} wins!"
-                )
+                self.result = f"{'White' if winner == 'w' else 'Black'} wins by checkmate!"
+                self.game_over = True
+                print(self.result)
 
             if self.board.is_stalemate(self.turn):
-                print(
-                    f"Stalemate. There was no legal moves for {'White' if self.turn == 'w' else 'Black'}."
-                )
-
+                self.result("Stalemate!")
+                self.game_over = True
+                print(self.result)
 
         self.selected_piece = ()
         self.valid_moves = []
