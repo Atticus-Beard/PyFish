@@ -60,6 +60,11 @@ class ChessGame:
                     f"Checkmate - {'White' if winner == 'w' else 'Black'} wins!"
                 )
 
+            if self.board.is_stalemate(self.turn):
+                print(
+                    f"Stalemate. There was no legal moves for {'White' if self.turn == 'w' else 'Black'}."
+                )
+
 
         self.selected_piece = ()
         self.valid_moves = []
