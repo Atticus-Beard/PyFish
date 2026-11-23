@@ -20,6 +20,9 @@ class ChessGame:
         self.turn = "w"
         self.running = True
 
+        self.game_over = False
+        self.result = ""
+
     def handle_click(self):
         col = pygame.mouse.get_pos()[0] // SQ_SIZE
         row = pygame.mouse.get_pos()[1] // SQ_SIZE
@@ -52,15 +55,73 @@ class ChessGame:
             self.board.move(self.selected_piece, position)
             self.turn = "b" if self.turn == "w" else "w"
 
+            if self.board.is_checkmate(self.turn):
+                winner = "b" if self.turn == "w" else "w"
+                self.result = f"{'White' if winner == 'w' else 'Black'} wins by checkmate!"
+                self.game_over = True
+                print(self.result)
+
+            if self.board.is_stalemate(self.turn):
+                self.result("Stalemate!")
+                self.game_over = True
+                print(self.result)
+
         self.selected_piece = ()
         self.valid_moves = []
+
+
+    def show_game_over(self):
+        # Create fonts for the result message and restart instructions.
+        font = pygame.font.SysFont("arial", 48)
+        small_font = pygame.font.SysFont("arial", 24)
+
+        # Add a semi-transparent dark overlay over the finished chessboard.
+        overlay = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+        overlay.fill((0, 0, 0, 180))
+        self.screen.blit(overlay, (0,0))
+
+        # Prepares the text to render.
+        title = font.render(self.result, True, (255, 255, 255))
+        instructions = small_font.render(
+            "Press R to restart or ESC to quit",
+            True,
+            (255, 255, 255)
+        )
+
+        # Position the text in the center of the screen
+        self.screen.blit(
+            title,
+            title.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 30))
+        )
+
+        self.screen.blit(
+            instructions,
+            instructions.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 30)),
+        )
+
+    def reset(self):
+        self.board = Board()
+        self.selected_piece = ()
+        self.valid_moves = []
+        self.turn = "w"
+        self.game_over = False
+        self.result = ""
+
 
     def run(self):
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:
+
+                elif event.type == pygame.KEYDOWN:
+                    if self.game_over and event.key == pygame.K_r:
+                        self.reset()
+
+                    elif self.game_over and event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+
+                elif event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
                     self.handle_click()
 
             self.renderer.draw_board(
@@ -68,6 +129,9 @@ class ChessGame:
                 self.selected_piece,
                 self.valid_moves,
             )
+
+            if self.game_over:
+                self.show_game_over()
 
             pygame.display.flip()
             self.clock.tick(FPS)
