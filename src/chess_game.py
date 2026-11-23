@@ -52,6 +52,15 @@ class ChessGame:
             self.board.move(self.selected_piece, position)
             self.turn = "b" if self.turn == "w" else "w"
 
+            if self.board.is_checkmate(self.turn):
+                winner = "b" if self.turn == "w" else "w"
+
+                # Handle win screen here.
+                print(
+                    f"Checkmate - {'White' if winner == 'w' else 'Black'} wins!"
+                )
+
+
         self.selected_piece = ()
         self.valid_moves = []
 
