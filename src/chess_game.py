@@ -99,6 +99,14 @@ class ChessGame:
             instructions.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 30)),
         )
 
+    def reset(self):
+        self.board = Board()
+        self.selected_piece = ()
+        self.valid_moves = []
+        self.turn = "w"
+        self.game_over = False
+        self.result = ""
+
 
     def run(self):
         while self.running:
