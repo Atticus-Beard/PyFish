@@ -113,6 +113,14 @@ class ChessGame:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
+
+                elif event.type == pygame.KEYDOWN:
+                    if self.game_over and event.key == pygame.K_r:
+                        self.reset()
+
+                    elif self.game_over and event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+
                 elif event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
                     self.handle_click()
 
@@ -121,6 +129,9 @@ class ChessGame:
                 self.selected_piece,
                 self.valid_moves,
             )
+
+            if self.game_over:
+                self.show_game_over()
 
             pygame.display.flip()
             self.clock.tick(FPS)
