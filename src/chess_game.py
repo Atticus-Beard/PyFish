@@ -113,7 +113,7 @@ class ChessGame:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:
+                elif event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
                     self.handle_click()
 
             self.renderer.draw_board(
