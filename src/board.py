@@ -14,6 +14,13 @@ class Board:
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"],
         ]
 
+
+        # Castling flags
+        self.wks = True
+        self.wqs = True
+        self.bks = True
+        self.bqs = True
+
     def get_piece(self, position):
         row, col = position
         return self.grid[row][col]
@@ -47,6 +54,14 @@ class Board:
             #valid_choices = {"Q", "R", "N", "B"}
             #chosen_piece = promotion_piece.upper() if promotion_piece.upper() in valid_choices else "Q"
             self.grid[row][col] = f"{color}Q"
+
+        if piece == "wK":
+            self.wks = False
+            self.wqs = False
+
+        elif piece == "bK":
+            self.bks = False
+            self.bqs = False
 
     def find_king(self, color):
         '''Takes in parameter color and returns tuple of where that king is.'''
