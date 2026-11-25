@@ -20,14 +20,33 @@ class Board:
 
     def is_empty(self, position):
         return self.get_piece(position) == "--"
+    
 
-    def move(self, start, end):
+    def is_promotion_move(self, start, end) -> bool:
+        piece = self.get_piece(start)
+        if len(piece) < 2 or piece[1] != "P":
+            return False
+
+        color = piece[0]
+        end_row, _ = end
+        promotion_row = 0 if color == "w" else DIMENSION - 1
+
+        return end_row == promotion_row
+
+    def move(self, start, end, promotion_piece: str = "Q"):
         piece = self.get_piece(start)
         row, col = end
         start_row, start_col = start
+        is_promotion = self.is_promotion_move(start, end)
 
         self.grid[row][col] = piece
         self.grid[start_row][start_col] = "--"
+        
+        if is_promotion:
+            color = piece[0]
+            valid_choices = {"Q", "R", "N", "B"}
+            chosen_piece = promotion_piece.upper() if promotion_piece.upper() in valid_choices else "Q"
+            self.grid[row][col] = f"{color}{chosen_piece}"
 
     def find_king(self, color):
         '''Takes in parameter color and returns tuple of where that king is.'''
