@@ -33,7 +33,7 @@ class Board:
 
         return end_row == promotion_row
 
-    def move(self, start, end, promotion_piece: str = "Q"):
+    def move(self, start, end):
         piece = self.get_piece(start)
         row, col = end
         start_row, start_col = start
@@ -44,9 +44,9 @@ class Board:
         
         if is_promotion:
             color = piece[0]
-            valid_choices = {"Q", "R", "N", "B"}
-            chosen_piece = promotion_piece.upper() if promotion_piece.upper() in valid_choices else "Q"
-            self.grid[row][col] = f"{color}{chosen_piece}"
+            #valid_choices = {"Q", "R", "N", "B"}
+            #chosen_piece = promotion_piece.upper() if promotion_piece.upper() in valid_choices else "Q"
+            self.grid[row][col] = f"{color}Q"
 
     def find_king(self, color):
         '''Takes in parameter color and returns tuple of where that king is.'''
